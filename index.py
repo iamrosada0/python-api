@@ -37,8 +37,3 @@ def translate_text():
         return jsonify({"error": f"Translation failed: {str(e)}"}), 500
 
 
-# Vercel expects a specific handler for serverless functions
-def handler(request):
-    with app.app_context():
-        return app.full_dispatch_request()
-

@@ -35,7 +35,5 @@ def translate_text():
     except Exception as e:
         return jsonify({"error": f"Translation failed: {str(e)}"}), 500
 
-# Vercel-specific handler
-def handler(request):
-    with app.app_context():
-        return app.full_dispatch_request()
+if __name__ == '__main__':
+    app.run()

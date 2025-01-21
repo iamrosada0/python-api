@@ -1,11 +1,10 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS  # Import CORS
-from translate import Translator
+# from flask import Flask, request, jsonify
+# from translate import Translator
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 # Enable CORS for the entire app
-CORS(app)
+
 
 # @app.route("/", methods=["GET"])
 # def home():
@@ -43,11 +42,15 @@ CORS(app)
 #     app.run()
 
 
+from flask_cors import CORS  # Import CORS
 
 from flask import Flask, request, jsonify
 from deep_translator import GoogleTranslator
 
 app = Flask(__name__)
+
+
+CORS(app)
 
 @app.route("/", methods=["GET"])
 def home():

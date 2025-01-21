@@ -9,17 +9,17 @@ def home():
 
 @app.route("/translate", methods=["POST"])
 def translate_text():
-    # Obter os dados do corpo da requisição
+    # Get the data from the request
     data = request.get_json()
     
-    # Validar os dados recebidos
+    # Validate the incoming data
     if not data or 'text' not in data or 'direction' not in data:
         return jsonify({"error": "Both 'text' and 'direction' fields are required."}), 400
 
     input_text = data['text']
     direction = data['direction']
 
-    # Configurar a tradução com base na direção selecionada
+    # Configure translation based on the direction specified
     try:
         if direction == "Portuguese to English":
             translator = Translator(to_lang="en", from_lang="pt")
@@ -28,14 +28,17 @@ def translate_text():
         else:
             return jsonify({"error": "Invalid translation direction. Use 'Portuguese to English' or 'English to Portuguese'."}), 400
 
-        # Realizar a tradução
+        # Perform the translation
         translated_text = translator.translate(input_text)
 
-        # Retornar o texto traduzido como resposta JSON
+        # Return the translated text as a JSON response
         return jsonify({"translated_text": translated_text})
     except Exception as e:
         return jsonify({"error": f"Translation failed: {str(e)}"}), 500
 
 
-if __name__ == "__main__":
-    app.run()
+# Vercel expects a specific handler for serverless functions
+def handler(request):
+    with app.app_context():
+        return app.full_dispatch_request()
+

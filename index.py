@@ -5,7 +5,7 @@ from translate import Translator
 app = Flask(__name__)
 
 # Enable CORS for the entire app
-CORS(app, origins=["https://interface-transaltor.vercel.app/"])
+CORS(app)
 
 @app.route("/", methods=["GET"])
 def home():

@@ -1,7 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 from translate import Translator
 
 app = Flask(__name__)
+
+# Enable CORS for the entire app
+CORS(app, origins=["https://interface-transaltor.vercel.app/"])
 
 @app.route("/", methods=["GET"])
 def home():
@@ -10,7 +14,7 @@ def home():
 @app.route("/translate", methods=["POST"])
 def translate_text():
     data = request.get_json()
-    
+
     # Validate the incoming data
     if not data or 'text' not in data or 'direction' not in data:
         return jsonify({"error": "Both 'text' and 'direction' fields are required."}), 400

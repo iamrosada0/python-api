@@ -9,7 +9,6 @@ def home():
 
 @app.route("/translate", methods=["POST"])
 def translate_text():
-    # Get the data from the request
     data = request.get_json()
     
     # Validate the incoming data
@@ -19,7 +18,7 @@ def translate_text():
     input_text = data['text']
     direction = data['direction']
 
-    # Configure translation based on the direction specified
+    # Set up translation based on direction
     try:
         if direction == "Portuguese to English":
             translator = Translator(to_lang="en", from_lang="pt")
@@ -36,4 +35,7 @@ def translate_text():
     except Exception as e:
         return jsonify({"error": f"Translation failed: {str(e)}"}), 500
 
-
+# Vercel-specific handler
+def handler(request):
+    with app.app_context():
+        return app.full_dispatch_request()

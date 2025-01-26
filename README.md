@@ -23,8 +23,8 @@ Before running this project, ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   git clone https://github.com/iamrosada0/python-api
+   cd python-api
    ```
 
 2. Create and activate a virtual environment:
